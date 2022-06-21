@@ -20,8 +20,8 @@
             (class request_payment reliable timestamp
                 (parameter 0)
             (class serving_complete reliable timestamp
-                (parameter 0)
                 (parameter 1)
+                (parameter 0)
             (class terminal_failure reliable timestamp
                 (parameter 0)
             (class looking_for_queue reliable timestamp
@@ -31,7 +31,7 @@
                 (parameter 1)
             (class join_queue reliable timestamp
                 (parameter 0)
-                (parameter 0)
+                (parameter 1)
             (class payment_failure reliable timestamp
                 (parameter 0)
             (class payment_complete reliable timestamp
