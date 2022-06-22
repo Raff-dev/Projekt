@@ -14,6 +14,8 @@ public class QueueAmbassador extends QueueBasedAmbassador {
     ArrayList<Integer> customerIds = new ArrayList<>();
     ArrayList<Integer> privilegedCustomerIds = new ArrayList<>();
 
+    ArrayList<Integer> queueLengthHistory = new ArrayList<>();
+
     QueueAmbassador(int queueId) {
         super(queueId);
     }
@@ -43,6 +45,7 @@ public class QueueAmbassador extends QueueBasedAmbassador {
                 } catch (ArrayIndexOutOfBounds e) {
                     throw new RuntimeException(e);
                 }
+                queueLengthHistory.add(new Integer(customerIds.size() + privilegedCustomerIds.size()));
                 break;
         }
     }
@@ -66,4 +69,13 @@ public class QueueAmbassador extends QueueBasedAmbassador {
         customerIds.removeIf(cId -> Objects.equals(cId, id));
         System.out.println();
     }
+
+    public int getQueueLength(){
+        return customerIds.size() + privilegedCustomerIds.size();
+    }
+    public float getAverageQueueLength(){
+        return queueLengthHistory.size() == 0 ? 0 : ((float) queueLengthHistory.stream().mapToInt(n->n).sum() / (float) queueLengthHistory.size());
+    }
+
+
 }

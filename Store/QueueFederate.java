@@ -31,6 +31,11 @@ public class QueueFederate extends Federate {
             queueAmbassador.removeCustomer(customerId);
             queueAmbassador.isServed = true;
             sendInteraction("service_request", queueId, customerId);
+            int parameters[] = {
+                    queueId,
+                    queueAmbassador.getQueueLength(),
+                    (int)(queueAmbassador.getAverageQueueLength() * 100.0)
+            };
             advanceTime(timeStep);
         }
     }
@@ -42,6 +47,7 @@ public class QueueFederate extends Federate {
     protected void publishAndSubscribe() throws RTIexception {
         publishAndSubscribe(new String[]{
                 "service_request",
+                "information_call",
         }, new String[]{
                 "serving_complete",
                 "payment_failure",

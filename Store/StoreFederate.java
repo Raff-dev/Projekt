@@ -32,7 +32,33 @@ public class StoreFederate extends Federate {
             CashierFederate cashierFederate = new CashierFederate(queueId);
             QueueFederate queueFederate = new QueueFederate(queueId);
             TerminalFederate terminalFederate = new TerminalFederate(queueId);
+            StatisticsFederate statisticsFederate = new StatisticsFederate(queueId);
+            GuiFederate guiFederate = new GuiFederate(queueId);
+            ApiFederate apiFederate = new ApiFederate(queueId);
 
+            new Thread(() -> {
+                try {
+                    guiFederate.runFederate();
+                } catch (RTIexception | InvalidAttributeValueException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
+
+            new Thread(() -> {
+                try {
+                    apiFederate.runFederate();
+                } catch (RTIexception | InvalidAttributeValueException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
+
+            new Thread(() -> {
+                try {
+                    statisticsFederate.runFederate();
+                } catch (RTIexception | InvalidAttributeValueException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
             new Thread(() -> {
                 try {
                     cashierFederate.runFederate();
