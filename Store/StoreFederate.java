@@ -32,6 +32,7 @@ public class StoreFederate extends Federate {
             CashierFederate cashierFederate = new CashierFederate(queueId);
             QueueFederate queueFederate = new QueueFederate(queueId);
             TerminalFederate terminalFederate = new TerminalFederate(queueId);
+
             StatisticsFederate statisticsFederate = new StatisticsFederate(queueId);
             GuiFederate guiFederate = new GuiFederate(queueId);
             ApiFederate apiFederate = new ApiFederate(queueId);

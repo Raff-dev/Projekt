@@ -30,7 +30,7 @@ public class ApiAmbassador extends QueueBasedAmbassador{
                 this.averageQueueLength = EncodingHelpers.decodeInt(theInteraction.getValue(2));
 
                 if (peopleInQueue > 0 && averageQueueLength > 0){
-                    String urlString = "http://localhost:5000/Qid:" + String.valueOf(queueId) + "/Now:" + String.valueOf(peopleInQueue)  + "/Avg:" + String.valueOf(averageQueueLength/100.0) ;
+                    String urlString = "http://localhost:5000/Qid:" + queueId + "/Now:" + peopleInQueue + "/Avg:" + averageQueueLength / 100.0;
                     URL url = new URL(urlString);
                     URLConnection conn = url.openConnection();
                     InputStream is = conn.getInputStream();
